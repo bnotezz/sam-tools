@@ -153,7 +153,7 @@ fun SettingsScreen(
             ),
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/sam-tools/sam-tools")).apply {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/bnotezz/sam-tools")).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 }
                 try {
@@ -203,7 +203,7 @@ fun SettingsScreen(
             ),
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/sam-tools/sam-tools/issues")).apply {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/bnotezz/sam-tools/issues")).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 }
                 try {

@@ -78,7 +78,7 @@ sam-tools/
 ### Run Locally
 1. Clone the repository:
    ```bash
-   git clone https://github.com/sam-tools/sam-tools.git
+   git clone https://github.com/bnotezz/sam-tools.git
    cd sam-tools
    ```
 2. Build debug APK:
