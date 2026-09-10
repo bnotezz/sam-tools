@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "com.samtools.app-release-52:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.samtools.app-main-53:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/drawable_ic_pin.xml.flat",
+        "source": "com.samtools.app-main-53:/drawable/ic_pin.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/xml_shortcuts.xml.flat",
+        "source": "com.samtools.app-main-53:/xml/shortcuts.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/drawable_ic_download.xml.flat",
+        "source": "com.samtools.app-main-53:/drawable/ic_download.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/drawable_ic_tailscale_connect.xml.flat",
+        "source": "com.samtools.app-main-53:/drawable/ic_tailscale_connect.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.samtools.app-main-53:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/drawable_ic_tailscale_disconnect.xml.flat",
+        "source": "com.samtools.app-main-53:/drawable/ic_tailscale_disconnect.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/drawable_ic_launcher_monochrome.xml.flat",
+        "source": "com.samtools.app-main-53:/drawable/ic_launcher_monochrome.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.samtools.app-main-53:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.samtools.app-release-52:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.samtools.app-main-53:/drawable/ic_launcher_background.xml"
+    }
+]

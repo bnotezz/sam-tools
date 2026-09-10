@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/xml_shortcuts.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/xml/shortcuts.xml"
+    },
+    {
+        "merged": "com.samtools.app-debug-56:/drawable_ic_pin.xml.flat",
+        "source": "com.samtools.app-main-58:/drawable/ic_pin.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/drawable_ic_tailscale_connect.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/drawable/ic_tailscale_connect.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/drawable_ic_tailscale_disconnect.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/drawable/ic_tailscale_disconnect.xml"
+    },
+    {
+        "merged": "com.samtools.app-debug-56:/drawable_ic_download.xml.flat",
+        "source": "com.samtools.app-main-58:/drawable/ic_download.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/drawable_ic_download.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/drawable/ic_download.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/drawable_ic_launcher_monochrome.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/drawable/ic_launcher_monochrome.xml"
+    },
+    {
+        "merged": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-debug-56:/drawable_ic_pin.xml.flat",
+        "source": "/Users/denys/.gradle/daemon/8.9/com.samtools.app-main-58:/drawable/ic_pin.xml"
+    }
+]

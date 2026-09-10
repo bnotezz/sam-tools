@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">SAM Tools</string>
+    <string name="download">Зберегти в Завантаження</string>
+    <string name="save_to_downloads_desc">Збереження спільних файлів безпосередньо в папку Завантаження</string>
+
+    <!-- Навігація та Заголовки -->
+    <string name="nav_home">Головна</string>
+    <string name="nav_shortcuts">Ярлики</string>
+    <string name="nav_downloads">Завантаження</string>
+    <string name="nav_settings">Налаштування</string>
+
+    <!-- Головний екран -->
+    <string name="home_welcome_title">Вдосконалюйте досвід One UI</string>
+    <string name="home_welcome_subtitle">Легкі та зручні утиліти, створені для заповнення прогалин та прискорення роботи на вашому Samsung Galaxy.</string>
+    <string name="home_status_title">Активні модулі</string>
+    <string name="home_save_downloads_status">Зберегти в Завантаження: готово в меню «Поділитися»</string>
+    <string name="home_shortcuts_status">Ярлики програми: %1$d активно</string>
+    <string name="home_quick_tips_title">Поради та підказки</string>
+    <string name="home_tip_share_sheet">Ділячись будь-яким файлом чи медіа з будь-якої програми, виберіть «Зберегти в Завантаження», щоб швидко скопіювати його у папку «Завантаження».</string>
+    <string name="home_tip_shortcuts">Затисніть іконку SAM Tools на головному екрані для швидкого підключення/відключення Tailscale VPN, або закріпіть окремі ярлики на робочому столі.</string>
+
+    <!-- Функціонал «Зберегти в Завантаження» -->
+    <string name="save_dialog_title">Збереження в Завантаження</string>
+    <string name="save_dialog_preparing">Підготовка файлів…</string>
+    <string name="save_dialog_saving">Збереження %1$d з %2$d файлів…</string>
+    <string name="save_dialog_success">Успішно збережено %1$d файл(ів) у Завантаження</string>
+    <string name="save_dialog_error">Помилка збереження файлу: %1$s</string>
+    <string name="save_dialog_no_files">Не знайдено файлів для збереження.</string>
+    <string name="btn_open_file">Відкрити файл</string>
+    <string name="btn_open_downloads">Відкрити Завантаження</string>
+    <string name="btn_close">Закрити</string>
+    <string name="toast_saved_successfully">Збережено %1$s у Завантаження</string>
+    <string name="toast_saved_multiple">Збережено %1$d файлів у Завантаження</string>
+    <string name="toast_saving_failed">Не вдалося зберегти файли: %1$s</string>
+
+    <!-- Налаштування завантажень -->
+    <string name="pref_downloads_title">Налаштування завантажень</string>
+    <string name="pref_subfolder_title">Власна підпапка</string>
+    <string name="pref_subfolder_summary">Зберігати в Downloads/%1$s (залиште пустим для кореневої папки Downloads)</string>
+    <string name="pref_subfolder_dialog_title">Підпапка в Завантаженнях</string>
+    <string name="pref_subfolder_placeholder">наприклад: SAM Tools</string>
+    <string name="pref_auto_save_title">Миттєве збереження</string>
+    <string name="pref_auto_save_summary">Зберігати негайно без діалогового вікна, лише з коротким сповіщенням</string>
+    <string name="pref_overwrite_title">Перезаписувати дублікати</string>
+    <string name="pref_overwrite_summary">Якщо вимкнено, до файлів додаватиметься номер: (1), (2)</string>
+
+    <!-- Функціонал ярликів -->
+    <string name="shortcuts_screen_title">Ярлики програми</string>
+    <string name="shortcuts_screen_desc">Керуйте динамічними ярликами, які відображаються при затисканні іконки SAM Tools, або закріплюйте їх на робочому столі.</string>
+    <string name="shortcut_tailscale_connect_label">Підключити Tailscale</string>
+    <string name="shortcut_tailscale_connect_short">Підключити</string>
+    <string name="shortcut_tailscale_connect_desc">Швидке встановлення з\'єднання з Tailscale VPN</string>
+    <string name="shortcut_tailscale_disconnect_label">Відключити Tailscale</string>
+    <string name="shortcut_tailscale_disconnect_short">Відключити</string>
+    <string name="shortcut_tailscale_disconnect_desc">Розірвати активне з\'єднання Tailscale VPN</string>
+
+    <string name="btn_pin_to_home">На робочий стіл</string>
+    <string name="btn_test_action">Перевірити</string>
+    <string name="toast_shortcut_pinned">Запит на додавання ярлика надіслано</string>
+    <string name="toast_shortcut_pin_not_supported">Лаунчер не підтримує закріплення ярликів</string>
+
+    <!-- Дії Tailscale -->
+    <string name="tailscale_connecting">Tailscale: Підключення…</string>
+    <string name="tailscale_disconnecting">Tailscale: Відключення…</string>
+    <string name="tailscale_not_installed">Програма Tailscale не встановлена. Будь ласка, встановіть її.</string>
+    <string name="btn_install_tailscale">Встановити Tailscale</string>
+
+    <!-- Загальні налаштування -->
+    <string name="settings_title">Налаштування</string>
+    <string name="settings_theme_title">Вигляд</string>
+    <string name="settings_theme_summary">Тема системи / Динамічні кольори (Material You)</string>
+    <string name="settings_about_title">Про SAM Tools</string>
+    <string name="settings_about_desc">Створено з увагою до деталей, щоб доповнити можливості One UI та підвищити щоденну зручність.</string>
+    <string name="settings_version">Версія %1$s (%2$d)</string>
+    <string name="settings_source_code">Вихідний код на GitHub</string>
+    <string name="settings_report_issue">Повідомити про проблему</string>
+    <string name="settings_license">Ліцензія з відкритим кодом (MIT)</string>
+
+    <!-- Загальне -->
+    <string name="btn_save">Зберегти</string>
+    <string name="btn_cancel">Скасувати</string>
+    <string name="btn_ok">OK</string>
+</resources>

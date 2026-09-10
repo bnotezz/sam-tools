@@ -1,0 +1,27 @@
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.SamTools" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Translucent Dialog / BottomSheet Theme for SaveToDownloadsActivity -->
+    <style name="Theme.SamTools.Translucent" parent="Theme.SamTools">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!-- Zero-UI Trampoline Theme for Shortcuts -->
+    <style name="Theme.SamTools.Trampoline" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Allow querying Tailscale package on Android 11+ (API 30+) -->
+    <queries>
+        <package android:name="com.tailscale.ipn" />
+    </queries>
+
+    <application
+        android:name=".SamToolsApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@null"
+        android:fullBackupContent="@null"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SamTools">
+
+        <!-- Main Dashboard & Settings Activity -->
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SamTools">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <!-- Save to Downloads Share Sheet Target Activity -->
+        <activity
+            android:name=".ui.SaveToDownloadsActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_download"
+            android:label="@string/download"
+            android:theme="@style/Theme.SamTools.Translucent">
+            <intent-filter android:label="@string/download">
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- Comprehensive mime types for maximum share-sheet compatibility -->
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+
+        <!-- Activity Alias for Google Files "Save to Downloads" compatibility -->
+        <activity-alias
+            android:name="com.google.android.apps.nbu.files.gateway.savetodownloads.SaveToDownloadsActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_download"
+            android:label="@string/download"
+            android:targetActivity=".ui.SaveToDownloadsActivity">
+            <intent-filter android:label="@string/download">
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Zero-UI Launcher Shortcut Trampoline -->
+        <activity
+            android:name=".ui.ShortcutTrampolineActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.SamTools.Trampoline">
+            <intent-filter>
+                <action android:name="com.samtools.action.SHORTCUT_TAILSCALE_CONNECT" />
+                <action android:name="com.samtools.action.SHORTCUT_TAILSCALE_DISCONNECT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
