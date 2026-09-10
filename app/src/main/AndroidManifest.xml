@@ -27,10 +27,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
 
         <!-- Save to Downloads Share Sheet Target Activity -->
@@ -45,6 +41,12 @@
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <!-- Comprehensive mime types for maximum share-sheet compatibility -->
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="application/*" />
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
@@ -65,6 +67,7 @@
                 <data android:mimeType="audio/*" />
                 <data android:mimeType="application/pdf" />
                 <data android:mimeType="text/plain" />
+                <data android:mimeType="application/*" />
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity-alias>

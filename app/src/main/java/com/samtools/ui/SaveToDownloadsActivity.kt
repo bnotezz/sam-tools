@@ -136,36 +136,51 @@ class SaveToDownloadsActivity : ComponentActivity() {
     private fun extractUrisFromIntent(intent: Intent): List<Uri> {
         val uriList = mutableListOf<Uri>()
 
+        // 1. Direct intent data
+        intent.data?.let { uriList.add(it) }
+
+        // 2. EXTRA_STREAM content
         when (intent.action) {
             Intent.ACTION_SEND -> {
-                val streamUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
-                } else {
-                    @Suppress("DEPRECATION")
-                    intent.getParcelableExtra(Intent.EXTRA_STREAM) as? Uri
-                }
-                if (streamUri != null) {
-                    uriList.add(streamUri)
-                } else if (intent.clipData != null && intent.clipData!!.itemCount > 0) {
-                    for (i in 0 until intent.clipData!!.itemCount) {
-                        intent.clipData!!.getItemAt(i).uri?.let { uriList.add(it) }
+                try {
+                    val streamUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
+                    } else {
+                        @Suppress("DEPRECATION")
+                        intent.getParcelableExtra(Intent.EXTRA_STREAM) as? Uri
                     }
+                    if (streamUri != null) {
+                        uriList.add(streamUri)
+                    } else {
+                        intent.getStringExtra(Intent.EXTRA_STREAM)?.let { str ->
+                            try { uriList.add(Uri.parse(str)) } catch (_: Exception) {}
+                        }
+                    }
+                } catch (_: Exception) {
+                    try {
+                        @Suppress("DEPRECATION")
+                        val list = intent.getParcelableArrayListExtra<Parcelable>(Intent.EXTRA_STREAM)
+                        list?.filterIsInstance<Uri>()?.let { uriList.addAll(it) }
+                    } catch (_: Exception) {}
                 }
             }
             Intent.ACTION_SEND_MULTIPLE -> {
-                val parcelables = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM, Parcelable::class.java)
-                } else {
-                    @Suppress("DEPRECATION")
-                    intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM)
-                }
-                parcelables?.filterIsInstance<Uri>()?.let { uriList.addAll(it) }
-
-                if (uriList.isEmpty() && intent.clipData != null) {
-                    for (i in 0 until intent.clipData!!.itemCount) {
-                        intent.clipData!!.getItemAt(i).uri?.let { uriList.add(it) }
+                try {
+                    val parcelables = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM, Parcelable::class.java)
+                    } else {
+                        @Suppress("DEPRECATION")
+                        intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM)
                     }
-                }
+                    parcelables?.filterIsInstance<Uri>()?.let { uriList.addAll(it) }
+                } catch (_: Exception) {}
+            }
+        }
+
+        // 3. ClipData URIs
+        intent.clipData?.let { clipData ->
+            for (i in 0 until clipData.itemCount) {
+                clipData.getItemAt(i).uri?.let { uriList.add(it) }
             }
         }
 
@@ -173,11 +188,19 @@ class SaveToDownloadsActivity : ComponentActivity() {
     }
 
     private fun extractTextFromIntent(intent: Intent): String? {
-        return if (intent.action == Intent.ACTION_SEND) {
-            intent.getStringExtra(Intent.EXTRA_TEXT)
-        } else {
-            null
+        if (intent.action != Intent.ACTION_SEND) return null
+
+        val extraText = intent.getStringExtra(Intent.EXTRA_TEXT)
+            ?: intent.getCharSequenceExtra(Intent.EXTRA_TEXT)?.toString()
+        if (!extraText.isNullOrBlank()) return extraText
+
+        intent.clipData?.let { clipData ->
+            for (i in 0 until clipData.itemCount) {
+                val itemText = clipData.getItemAt(i).text?.toString()
+                if (!itemText.isNullOrBlank()) return itemText
+            }
         }
+        return null
     }
 
     @OptIn(ExperimentalMaterial3Api::class)

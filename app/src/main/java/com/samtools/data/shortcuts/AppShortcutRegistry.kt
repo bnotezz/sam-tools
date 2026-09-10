@@ -64,24 +64,33 @@ object AppShortcutRegistry {
      * Synchronizes dynamic shortcuts displayed on long-press of the app launcher icon.
      */
     fun updateDynamicShortcuts(context: Context, preferences: UserPreferences) {
-        val enabledShortcuts = getAllShortcuts(preferences)
-            .filter { it.isEnabled }
-            .map { buildShortcutInfo(context, it) }
+        try {
+            val enabledShortcuts = getAllShortcuts(preferences)
+                .filter { it.isEnabled }
+                .map { buildShortcutInfo(context, it) }
 
-        ShortcutManagerCompat.setDynamicShortcuts(context, enabledShortcuts)
+            ShortcutManagerCompat.setDynamicShortcuts(context, enabledShortcuts)
+        } catch (e: Exception) {
+            android.util.Log.e("AppShortcutRegistry", "Failed to update dynamic shortcuts", e)
+        }
     }
 
     /**
      * Requests the launcher to pin the selected shortcut directly to the user's home screen.
      */
     fun requestPinShortcut(context: Context, shortcutId: String, preferences: UserPreferences): Boolean {
-        if (!ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
-            return false
+        return try {
+            if (!ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
+                return false
+            }
+
+            val item = getAllShortcuts(preferences).firstOrNull { it.id == shortcutId } ?: return false
+            val shortcutInfo = buildShortcutInfo(context, item)
+
+            ShortcutManagerCompat.requestPinShortcut(context, shortcutInfo, null)
+        } catch (e: Exception) {
+            android.util.Log.e("AppShortcutRegistry", "Failed to request pin shortcut", e)
+            false
         }
-
-        val item = getAllShortcuts(preferences).firstOrNull { it.id == shortcutId } ?: return false
-        val shortcutInfo = buildShortcutInfo(context, item)
-
-        return ShortcutManagerCompat.requestPinShortcut(context, shortcutInfo, null)
     }
 }

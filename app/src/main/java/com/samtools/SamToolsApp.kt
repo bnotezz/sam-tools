@@ -19,7 +19,11 @@ class SamToolsApp : Application() {
         val preferencesRepository = UserPreferencesRepository.getInstance(this)
         applicationScope.launch {
             preferencesRepository.userPreferencesFlow.collectLatest { preferences ->
-                AppShortcutRegistry.updateDynamicShortcuts(this@SamToolsApp, preferences)
+                try {
+                    AppShortcutRegistry.updateDynamicShortcuts(this@SamToolsApp, preferences)
+                } catch (e: Exception) {
+                    android.util.Log.e("SamToolsApp", "Failed to update dynamic shortcuts", e)
+                }
             }
         }
     }
