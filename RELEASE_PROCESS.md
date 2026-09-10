@@ -180,10 +180,10 @@ Go to: **GitHub Repository -> Settings -> Secrets and variables -> Actions -> Ne
 Add the following secrets:
 | Secret Name | Description |
 |---|---|
-| `SIGNING_KEY_BASE64` | Base64-encoded string of `sam-tools-release.jks` |
-| `SIGNING_KEY_PASSWORD` | Password for the key entry |
-| `SIGNING_STORE_PASSWORD` | Password for the keystore file |
-| `SIGNING_KEY_ALIAS` | Key alias (e.g. `samtools`) |
+| `KEYSTORE_BASE64` | Base64-encoded string of `sam-tools-release.jks` |
+| `KEYSTORE_PASSWORD` | Password for the keystore file |
+| `KEY_ALIAS` | Key alias (e.g. `samtools`) |
+| `KEY_PASSWORD` | Password for the key entry |
 
 *(Note: If signing secrets are omitted, the workflow builds an unsigned release APK or signed debug APK ready for testing).*
 
