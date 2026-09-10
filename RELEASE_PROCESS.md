@@ -66,55 +66,37 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 ## 3. Versioning & Autoincrement Strategy
 
-Android uses two version parameters in `app/build.gradle.kts`:
-- **`versionCode`** (integer): Internal version number evaluated by the OS and app stores to determine upgrade priority. Must increase with every published release.
-- **`versionName`** (string): User-facing semantic version string (e.g. `1.0.0`, `1.1.0`).
+SAM Tools uses **Semantic Versioning** (`MAJOR.MINOR.PATCH`) configured in a single source of truth: **`version.properties`** at the project root.
 
-### Semantic Versioning Format (`MAJOR.MINOR.PATCH`):
-- **`MAJOR`**: Significant architectural overhaul or breaking changes.
-- **`MINOR`**: New One UI tools, new shortcuts, or substantial feature additions.
-- **`PATCH`**: Bug fixes, performance improvements, translation updates.
-
-### Version Autoincrement Methods:
-
-#### Method A: Git-Tag Driven Versioning (Recommended)
-You can derive `versionName` directly from the latest Git tag in `app/build.gradle.kts`:
-```kotlin
-fun getVersionName(): String {
-    return try {
-        val stdout = java.io.ByteArrayOutputStream()
-        exec {
-            commandLine("git", "describe", "--tags", "--abbrev=0")
-            standardOutput = stdout
-        }
-        stdout.toString().trim().removePrefix("v")
-    } catch (e: Exception) {
-        "1.0.0"
-    }
-}
-
-fun getVersionCode(): Int {
-    return try {
-        val stdout = java.io.ByteArrayOutputStream()
-        exec {
-            commandLine("git", "rev-list", "--count", "HEAD")
-            standardOutput = stdout
-        }
-        stdout.toString().trim().toInt()
-    } catch (e: Exception) {
-        1
-    }
-}
+```properties
+major=1
+minor=0
+patch=1
 ```
 
-#### Method B: Manual Bump in `app/build.gradle.kts`
-Before releasing, update:
-```kotlin
-defaultConfig {
-    versionCode = 2       // increment by 1
-    versionName = "1.1.0" // new semver
-}
+### Version Metrics:
+- **`versionName`**: Formatted as `$major.$minor.$patch` (e.g. `1.0.1`).
+- **`versionCode`**: Calculated formula: `major * 10000 + minor * 100 + patch` (e.g. `1.0.1` -> `10001`). This ensures strictly monotonic integer increases required by Android OS and app stores.
+- **`BuildConfig` in UI**: Exposed dynamically via `BuildConfig.VERSION_NAME` and `BuildConfig.VERSION_CODE`, displayed directly in the Settings screen.
+
+### Version Management Gradle Tasks:
+
+```bash
+# View current version details
+./gradlew printVersion
+
+# Auto-increment patch (1.0.0 -> 1.0.1)
+./gradlew bumpPatch
+
+# Auto-increment minor and reset patch (1.0.1 -> 1.1.0)
+./gradlew bumpMinor
+
+# Auto-increment major and reset minor & patch (1.1.0 -> 2.0.0)
+./gradlew bumpMajor
 ```
+
+### Automated Release Versioning:
+In GitHub Actions (`.github/workflows/release.yml`), triggering **Run workflow** automatically executes `bumpPatch` (or chosen bump type), updates `version.properties`, commits with `[skip ci]`, tags the commit as `vX.Y.Z`, builds release binaries, and names artifacts `sam-tools-vX.Y.Z.apk`.
 Commit the bump:
 ```bash
 git add app/build.gradle.kts

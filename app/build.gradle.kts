@@ -1,8 +1,26 @@
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
+
+val versionPropsFile = rootProject.file("version.properties")
+val versionProps = Properties().apply {
+    if (versionPropsFile.exists()) {
+        FileInputStream(versionPropsFile).use { load(it) }
+    }
+}
+
+val versionMajor = versionProps.getProperty("major", "1").toInt()
+val versionMinor = versionProps.getProperty("minor", "0").toInt()
+val versionPatch = versionProps.getProperty("patch", "0").toInt()
+
+val calculatedVersionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
+val calculatedVersionName = "$versionMajor.$versionMinor.$versionPatch"
 
 android {
     namespace = "com.samtools"
@@ -12,8 +30,8 @@ android {
         applicationId = "com.samtools"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = calculatedVersionCode
+        versionName = calculatedVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -65,6 +83,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packaging {
@@ -75,6 +94,78 @@ android {
 
     testOptions {
         unitTests.isReturnDefaultValues = true
+    }
+}
+
+// --- Semantic Versioning Helper Tasks ---
+
+tasks.register("printVersion") {
+    group = "versioning"
+    description = "Prints current semantic version details"
+    doLast {
+        println("versionName: $calculatedVersionName")
+        println("versionCode: $calculatedVersionCode")
+        println("tag: v$calculatedVersionName")
+    }
+}
+
+tasks.register("bumpPatch") {
+    group = "versioning"
+    description = "Increments patch version in version.properties"
+    doLast {
+        val props = Properties()
+        if (versionPropsFile.exists()) {
+            FileInputStream(versionPropsFile).use { props.load(it) }
+        }
+        val currentPatch = props.getProperty("patch", "0").toInt()
+        val nextPatch = currentPatch + 1
+        props.setProperty("patch", nextPatch.toString())
+        FileOutputStream(versionPropsFile).use {
+            props.store(it, "Auto-incremented by Gradle bumpPatch task")
+        }
+        val maj = props.getProperty("major", "1")
+        val min = props.getProperty("minor", "0")
+        println("Bumped patch version: $maj.$min.$nextPatch (Code: ${maj.toInt() * 10000 + min.toInt() * 100 + nextPatch})")
+    }
+}
+
+tasks.register("bumpMinor") {
+    group = "versioning"
+    description = "Increments minor version and resets patch to 0 in version.properties"
+    doLast {
+        val props = Properties()
+        if (versionPropsFile.exists()) {
+            FileInputStream(versionPropsFile).use { props.load(it) }
+        }
+        val currentMinor = props.getProperty("minor", "0").toInt()
+        val nextMinor = currentMinor + 1
+        props.setProperty("minor", nextMinor.toString())
+        props.setProperty("patch", "0")
+        FileOutputStream(versionPropsFile).use {
+            props.store(it, "Updated by Gradle bumpMinor task")
+        }
+        val maj = props.getProperty("major", "1")
+        println("Bumped minor version: $maj.$nextMinor.0 (Code: ${maj.toInt() * 10000 + nextMinor * 100})")
+    }
+}
+
+tasks.register("bumpMajor") {
+    group = "versioning"
+    description = "Increments major version and resets minor & patch to 0 in version.properties"
+    doLast {
+        val props = Properties()
+        if (versionPropsFile.exists()) {
+            FileInputStream(versionPropsFile).use { props.load(it) }
+        }
+        val currentMajor = props.getProperty("major", "1").toInt()
+        val nextMajor = currentMajor + 1
+        props.setProperty("major", nextMajor.toString())
+        props.setProperty("minor", "0")
+        props.setProperty("patch", "0")
+        FileOutputStream(versionPropsFile).use {
+            props.store(it, "Updated by Gradle bumpMajor task")
+        }
+        println("Bumped major version: $nextMajor.0.0 (Code: ${nextMajor * 10000})")
     }
 }
 
