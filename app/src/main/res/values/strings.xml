@@ -48,10 +48,10 @@
     <string name="shortcuts_screen_title">App Shortcuts</string>
     <string name="shortcuts_screen_desc">Manage dynamic shortcuts that appear when you long-press the SAM Tools icon or pin them to your home screen.</string>
     <string name="shortcut_tailscale_connect_label">Tailscale Connect</string>
-    <string name="shortcut_tailscale_connect_short">Connect</string>
+    <string name="shortcut_tailscale_connect_short">Tailscale Connect</string>
     <string name="shortcut_tailscale_connect_desc">Quickly establish Tailscale VPN connection</string>
     <string name="shortcut_tailscale_disconnect_label">Tailscale Disconnect</string>
-    <string name="shortcut_tailscale_disconnect_short">Disconnect</string>
+    <string name="shortcut_tailscale_disconnect_short">Tailscale Disconnect</string>
     <string name="shortcut_tailscale_disconnect_desc">Disconnect active Tailscale VPN tunnel</string>
 
     <string name="btn_pin_to_home">Pin to Home</string>

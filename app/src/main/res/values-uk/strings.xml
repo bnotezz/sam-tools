@@ -48,10 +48,10 @@
     <string name="shortcuts_screen_title">Ярлики програми</string>
     <string name="shortcuts_screen_desc">Керуйте динамічними ярликами, які відображаються при затисканні іконки SAM Tools, або закріплюйте їх на робочому столі.</string>
     <string name="shortcut_tailscale_connect_label">Підключити Tailscale</string>
-    <string name="shortcut_tailscale_connect_short">Підключити</string>
+    <string name="shortcut_tailscale_connect_short">Підключити Tailscale</string>
     <string name="shortcut_tailscale_connect_desc">Швидке встановлення з\'єднання з Tailscale VPN</string>
     <string name="shortcut_tailscale_disconnect_label">Відключити Tailscale</string>
-    <string name="shortcut_tailscale_disconnect_short">Відключити</string>
+    <string name="shortcut_tailscale_disconnect_short">Відключити Tailscale</string>
     <string name="shortcut_tailscale_disconnect_desc">Розірвати активне з\'єднання Tailscale VPN</string>
 
     <string name="btn_pin_to_home">На робочий стіл</string>
