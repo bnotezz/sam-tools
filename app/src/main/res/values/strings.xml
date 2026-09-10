@@ -23,26 +23,35 @@
     <string name="save_dialog_title">Saving to Downloads</string>
     <string name="save_dialog_preparing">Preparing files…</string>
     <string name="save_dialog_saving">Saving %1$d of %2$d files…</string>
-    <string name="save_dialog_success">Successfully saved %1$d file(s) to Downloads</string>
+    <string name="save_dialog_success_single">File saved to Downloads</string>
+    <string name="save_dialog_success_multiple">Saved %1$d files to Downloads</string>
     <string name="save_dialog_error">Error saving file: %1$s</string>
     <string name="save_dialog_no_files">No files found to save.</string>
     <string name="btn_open_file">Open File</string>
     <string name="btn_open_downloads">Open Downloads</string>
     <string name="btn_close">Close</string>
+    <string name="btn_done">Done</string>
     <string name="toast_saved_successfully">Saved %1$s to Downloads</string>
     <string name="toast_saved_multiple">Saved %1$d files to Downloads</string>
     <string name="toast_saving_failed">Failed to save files: %1$s</string>
+    <string name="toast_cannot_open_file">Cannot open file</string>
+    <string name="error_saving_text">Could not save text snippet</string>
+    <string name="error_unknown">Unknown error</string>
 
     <!-- Downloads Settings -->
     <string name="pref_downloads_title">Download Settings</string>
     <string name="pref_subfolder_title">Custom Subfolder</string>
     <string name="pref_subfolder_summary">Save into Downloads/%1$s (leave empty for root Downloads)</string>
     <string name="pref_subfolder_dialog_title">Downloads Subfolder</string>
+    <string name="pref_subfolder_dialog_desc">Specify a subfolder inside Downloads to keep your saved files organized. Leave blank to save directly into root Downloads.</string>
+    <string name="pref_subfolder_root">Downloads/ (Root)</string>
     <string name="pref_subfolder_placeholder">e.g. SAM Tools</string>
     <string name="pref_auto_save_title">Instant Save</string>
     <string name="pref_auto_save_summary">Save immediately without showing dialog, only a brief notification/toast</string>
     <string name="pref_overwrite_title">Overwrite Duplicates</string>
     <string name="pref_overwrite_summary">If disabled, automatic numbering like (1), (2) will be appended</string>
+    <string name="how_to_use_title">How to use</string>
+    <string name="how_to_use_instructions">1. Open any application (Gallery, Chrome, Telegram, etc.)\n2. Select file(s) and tap the Share button.\n3. Choose \"Save to Downloads\".\n4. SAM Tools will instantly copy the files to your Downloads directory.</string>
 
     <!-- Shortcuts Feature -->
     <string name="shortcuts_screen_title">App Shortcuts</string>
@@ -54,8 +63,8 @@
     <string name="shortcut_tailscale_disconnect_short">Tailscale Disconnect</string>
     <string name="shortcut_tailscale_disconnect_desc">Disconnect active Tailscale VPN tunnel</string>
 
-    <string name="btn_pin_to_home">Pin to Home</string>
-    <string name="btn_test_action">Test Action</string>
+    <string name="btn_pin_to_home">Pin</string>
+    <string name="btn_test_action">Test</string>
     <string name="toast_shortcut_pinned">Shortcut pinning requested</string>
     <string name="toast_shortcut_pin_not_supported">Launcher does not support pinning shortcuts</string>
 
@@ -73,11 +82,15 @@
     <string name="settings_about_desc">Designed with care to solve One UI quirks and improve everyday productivity.</string>
     <string name="settings_version">Version %1$s (%2$d)</string>
     <string name="settings_source_code">Source Code on GitHub</string>
+    <string name="settings_source_code_desc">View source, releases and contribution guide</string>
     <string name="settings_report_issue">Report an Issue</string>
+    <string name="settings_report_issue_desc">Submit bugs or request new One UI features</string>
     <string name="settings_license">Open Source License (MIT)</string>
 
     <!-- Common -->
     <string name="btn_save">Save</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_ok">OK</string>
+    <string name="test_share_sheet_title">Test Share Sheet</string>
+    <string name="test_share_text">Test file saved with SAM Tools!</string>
 </resources>

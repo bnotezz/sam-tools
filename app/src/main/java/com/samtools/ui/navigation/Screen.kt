@@ -16,6 +16,6 @@ sealed class Screen(val route: String, @StringRes val titleRes: Int, val icon: I
     data object Settings : Screen("settings", R.string.nav_settings, Icons.Default.Settings)
 
     companion object {
-        val bottomNavItems = listOf(Home, Shortcuts, Downloads, Settings)
+        val bottomNavItems = listOf(Downloads, Shortcuts, Settings)
     }
 }

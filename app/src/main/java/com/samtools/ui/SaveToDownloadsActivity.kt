@@ -45,6 +45,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -127,7 +128,7 @@ class SaveToDownloadsActivity : ComponentActivity() {
             if (saved != null) {
                 Toast.makeText(this, getString(R.string.toast_saved_successfully, saved.displayName), Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, getString(R.string.toast_saving_failed, "Could not save text snippet"), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.toast_saving_failed, getString(R.string.error_saving_text)), Toast.LENGTH_LONG).show()
             }
         }
         finish()
@@ -308,21 +309,25 @@ class SaveToDownloadsActivity : ComponentActivity() {
 
                     Text(
                         text = if (isSuccess) {
-                            stringResource(R.string.save_dialog_success, savedItems.size)
+                            if (savedItems.size == 1) {
+                                stringResource(R.string.save_dialog_success_single)
+                            } else {
+                                stringResource(R.string.save_dialog_success_multiple, savedItems.size)
+                            }
                         } else {
-                            stringResource(R.string.save_dialog_error, saveResult?.errorMessage ?: "Error")
+                            stringResource(R.string.save_dialog_error, saveResult?.errorMessage ?: stringResource(R.string.error_unknown))
                         },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(14.dp))
 
                     // Saved files list
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp),
+                            .height(if (savedItems.size > 1) 120.dp else 60.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(savedItems) { file ->
@@ -356,16 +361,16 @@ class SaveToDownloadsActivity : ComponentActivity() {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(18.dp))
 
-                    // Action buttons
-                    Row(
+                    // Action buttons (Material 3 vertical stacked layout with clear hierarchy)
+                    Column(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        if (savedItems.size == 1) {
+                        if (isSuccess && savedItems.size == 1) {
                             val singleFile = savedItems.first()
-                            FilledTonalButton(
+                            Button(
                                 onClick = {
                                     val viewIntent = Intent(Intent.ACTION_VIEW).apply {
                                         setDataAndType(singleFile.destinationUri, contentResolver.getType(singleFile.destinationUri))
@@ -374,43 +379,51 @@ class SaveToDownloadsActivity : ComponentActivity() {
                                     try {
                                         startActivity(viewIntent)
                                     } catch (e: Exception) {
-                                        Toast.makeText(this@SaveToDownloadsActivity, "Cannot open file", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this@SaveToDownloadsActivity, R.string.toast_cannot_open_file, Toast.LENGTH_SHORT).show()
                                     }
                                     onDismiss()
                                 },
-                                modifier = Modifier.weight(1f),
-                                shape = RoundedCornerShape(12.dp)
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(48.dp),
+                                shape = RoundedCornerShape(14.dp)
                             ) {
-                                Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(16.dp))
-                                Spacer(modifier = Modifier.width(6.dp))
+                                Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Spacer(modifier = Modifier.width(8.dp))
                                 Text(stringResource(R.string.btn_open_file))
                             }
                         }
 
-                        OutlinedButton(
-                            onClick = {
-                                val downloadsIntent = Intent(DownloadManager.ACTION_VIEW_DOWNLOADS).apply {
-                                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                                }
-                                try {
-                                    startActivity(downloadsIntent)
-                                } catch (ignored: Exception) {}
-                                onDismiss()
-                            },
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(12.dp)
-                        ) {
-                            Icon(Icons.Default.Folder, contentDescription = null, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text(stringResource(R.string.btn_open_downloads))
+                        if (isSuccess) {
+                            FilledTonalButton(
+                                onClick = {
+                                    val downloadsIntent = Intent(DownloadManager.ACTION_VIEW_DOWNLOADS).apply {
+                                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                    }
+                                    try {
+                                        startActivity(downloadsIntent)
+                                    } catch (ignored: Exception) {}
+                                    onDismiss()
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(48.dp),
+                                shape = RoundedCornerShape(14.dp)
+                            ) {
+                                Icon(Icons.Default.Folder, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(stringResource(R.string.btn_open_downloads))
+                            }
                         }
 
-                        Button(
+                        TextButton(
                             onClick = onDismiss,
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(12.dp)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(44.dp),
+                            shape = RoundedCornerShape(14.dp)
                         ) {
-                            Text(stringResource(R.string.btn_close))
+                            Text(stringResource(if (isSuccess) R.string.btn_done else R.string.btn_close))
                         }
                     }
                 }

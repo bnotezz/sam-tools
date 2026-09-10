@@ -165,15 +165,15 @@ fun HomeScreen(
                             // Test share sheet trigger
                             val testIntent = Intent(Intent.ACTION_SEND).apply {
                                 type = "text/plain"
-                                putExtra(Intent.EXTRA_TEXT, "Test file saved with SAM Tools!")
+                                putExtra(Intent.EXTRA_TEXT, context.getString(R.string.test_share_text))
                             }
-                            context.startActivity(Intent.createChooser(testIntent, "Test Share Sheet"))
+                            context.startActivity(Intent.createChooser(testIntent, context.getString(R.string.test_share_sheet_title)))
                         },
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text("Test")
+                        Text(stringResource(R.string.btn_test_action))
                     }
                 }
             }

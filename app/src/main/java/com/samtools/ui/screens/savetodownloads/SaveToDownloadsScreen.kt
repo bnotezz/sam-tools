@@ -152,7 +152,7 @@ fun SaveToDownloadsScreen(
                     )
                     Text(
                         text = if (preferences.subfolder.isBlank()) {
-                            "Downloads/ (Root)"
+                            stringResource(R.string.pref_subfolder_root)
                         } else {
                             stringResource(R.string.pref_subfolder_summary, preferences.subfolder)
                         },
@@ -251,17 +251,14 @@ fun SaveToDownloadsScreen(
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "How to use",
+                        text = stringResource(R.string.how_to_use_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "1. Open any application (Samsung Internet, Chrome, Gallery, Telegram, etc.)\n" +
-                            "2. Select file(s) or media and tap the Share button.\n" +
-                            "3. Look for \"Save to Downloads\" in the system share sheet.\n" +
-                            "4. SAM Tools will instantly copy the files to your public Downloads directory.",
+                    text = stringResource(R.string.how_to_use_instructions),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -280,7 +277,7 @@ fun SaveToDownloadsScreen(
             text = {
                 Column {
                     Text(
-                        text = "Specify a subfolder inside Downloads to keep your saved files organized. Leave blank to save directly into root Downloads.",
+                        text = stringResource(R.string.pref_subfolder_dialog_desc),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Spacer(modifier = Modifier.height(12.dp))

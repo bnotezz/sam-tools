@@ -57,20 +57,7 @@
             android:exported="true"
             android:icon="@drawable/ic_download"
             android:label="@string/download"
-            android:targetActivity=".ui.SaveToDownloadsActivity">
-            <intent-filter android:label="@string/download">
-                <action android:name="android.intent.action.SEND" />
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-                <data android:mimeType="video/*" />
-                <data android:mimeType="audio/*" />
-                <data android:mimeType="application/pdf" />
-                <data android:mimeType="text/plain" />
-                <data android:mimeType="application/*" />
-                <data android:mimeType="*/*" />
-            </intent-filter>
-        </activity-alias>
+            android:targetActivity=".ui.SaveToDownloadsActivity" />
 
         <!-- Zero-UI Launcher Shortcut Trampoline -->
         <activity
